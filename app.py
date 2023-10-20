@@ -37,14 +37,16 @@ with app.app_context():
 def auth():
     if request.path in config.required_login:
         id = session.get('uid')
+        print(id)
         if not id:
-            return redirect("/form")
             session.pop('uid', None)
+            return redirect("/form")
         else:
             # 获取user
-            user = User.query.get(id)
+            # user = User.query.get(id)
             # 把user放到全局变量中
             g.user = id
+            
 
 @app.route('/')
 def hello():
@@ -60,7 +62,7 @@ def dashboard():
 #     user = User(name="timewaster", password="123456")
 #     # 将定义的对象加到session
 #     db.session.add(user)
-#     # 讲session同步到数据库
+#     # 将session同步到数据库
 #     db.session.commit()
 #     return "用户创建成功"
 
@@ -77,7 +79,8 @@ def page_form():
         # print(username)
         users = User.query.filter_by(name=username).first()
         if users and users.password == password:
-            return redirect('/dashboard/'+username)
+            session['uid'] = username
+            return redirect('/dashboard')
         else:
             session.pop("uid", None)
             return "账号或密码错误"
