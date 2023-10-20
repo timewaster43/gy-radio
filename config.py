@@ -1,3 +1,3 @@
 required_login = [
-    "/dashboard/<user>", 
+    "/dashboard", 
 ]
