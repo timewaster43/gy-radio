@@ -19,6 +19,18 @@
             {{ form.password.label }}
             {{ form.password }}
         </p>
+        <select name="program" id="program">
+            {% for program in program_list %}
+                <option value={{program.name}}>{{program.name}}</option>
+            {% endfor %}
+        </select>
+        <p>
+            <select name="auth" id="auth">
+                {% for job in auth %}
+                    <option value="{{ job }}">{{job}}</option>
+                {% endfor %}
+            </select>
+        </p>
         <p>
             {{ form.submit }}
         </p>
