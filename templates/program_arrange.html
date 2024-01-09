@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>节目安排</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th></th> <!-- 新增的列头 -->
+                    <th>周一</th>
+                    <th>周二</th>
+                    <th>周三</th>
+                    <th>周四</th>
+                    <th>周五</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>中午</th> <!-- 新增的行头 -->
+                    <td>{{ form.od1a }}</td>
+                    <td>{{ form.od2a }}</td>
+                    <td>{{ form.od3a }}</td>
+                    <td>{{ form.od4a }}</td>
+                    <td>{{ form.od5a }}</td>
+                </tr>
+                <tr>
+                    <th>下午</th> <!-- 新增的行头 -->
+                    <td>{{ form.od1p }}</td>
+                    <td>{{ form.od2p }}</td>
+                    <td>{{ form.od3p }}</td>
+                    <td>{{ form.od4p }}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            {{ form.submit }}
+        </p>
+    </form>
+</body>
+</html>

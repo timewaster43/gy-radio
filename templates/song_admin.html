@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>歌曲审核</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>待审核的歌曲列表</h1>
+    <form id="approval-form" action="/admin/songs" method="POST">
+        <table>
+            <thead>
+                <tr>
+                    <th>歌曲名字</th>
+                    <th>创作歌手</th>
+                    <th>拒绝</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for song in songs %}
+                <tr>
+                    <td>{{ song.song_name }}</td>
+                    <td>{{ song.song_artist }}</td>
+                    <td><button type="button" class="reject-btn" data-song-id="{{ song.id }}">拒绝</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="hidden" name="action" value="approve">
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            // 拒绝按钮点击事件
+            $('.reject-btn').click(function() {
+                var songId = $(this).data('song-id');
+                deleteSong(songId);
+            });
+
+            // 删除歌曲函数
+            function deleteSong(songId) {
+                $.ajax({
+                    url: '/admin_songs/' + songId,
+                    type: 'POST',
+                    success: function(response) {
+                        // 删除成功后移除对应的歌曲行
+                        $('tr[data-song-id="' + songId + '"]').remove();
+                        location.replace("/admin_songs");
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
